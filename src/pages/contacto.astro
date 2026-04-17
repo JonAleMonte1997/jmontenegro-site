@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const links = [
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/jonathan-alexis-montenegro/',
+    display: 'jonathan-alexis-montenegro',
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/[tu-usuario-github]',
+    display: '[tu-usuario-github]',
+  },
+  {
+    label: 'Email',
+    href: 'mailto:jonathanalexismontenegro97@gmail.com',
+    display: 'jonathanalexismontenegro97@gmail.com',
+  },
+];
+---
+<BaseLayout title="Contacto" description="Formas de contactar a Jonathan Montenegro">
+  <h1 class="text-3xl font-semibold mb-2">Contacto</h1>
+  <p class="text-muted mb-8">Podés encontrarme en:</p>
+
+  <div class="space-y-3">
+    {links.map(link => (
+      <a
+        href={link.href}
+        target={link.href.startsWith('mailto') ? undefined : '_blank'}
+        rel={link.href.startsWith('mailto') ? undefined : 'noopener'}
+        class="flex items-center justify-between border border-surface p-4 hover:border-accent transition-colors group"
+      >
+        <span class="font-mono text-accent text-sm">{link.label}</span>
+        <span class="text-muted text-sm group-hover:text-text transition-colors">{link.display}</span>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
