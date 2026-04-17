@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
       },
     },
   },

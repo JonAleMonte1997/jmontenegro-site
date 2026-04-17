@@ -9,8 +9,13 @@ const links = [
   },
   {
     label: 'GitHub',
-    href: 'https://github.com/[tu-usuario-github]',
-    display: '[tu-usuario-github]',
+    href: 'https://github.com/JonAleMonte1997',
+    display: 'JonAleMonte1997',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/jmontenegro.dev/?hl=es',
+    display: '@jmontenegro.dev',
   },
   {
     label: 'Email',
@@ -29,7 +34,7 @@ const links = [
         href={link.href}
         target={link.href.startsWith('mailto') ? undefined : '_blank'}
         rel={link.href.startsWith('mailto') ? undefined : 'noopener'}
-        class="flex items-center justify-between border border-surface p-4 hover:border-accent transition-colors group"
+        class="flex items-center justify-between border border-surface p-4 hover:border-accent transition-colors group cursor-pointer hover-glow"
       >
         <span class="font-mono text-accent text-sm">{link.label}</span>
         <span class="text-muted text-sm group-hover:text-text transition-colors">{link.display}</span>

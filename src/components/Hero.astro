@@ -1,25 +1,68 @@
 ---
 ---
-<section class="py-16 border-b border-surface">
-  <p class="font-mono text-accent text-sm mb-3">$ whoami</p>
-  <h1 class="text-4xl font-semibold mb-2 tracking-tight">Jonathan Montenegro</h1>
-  <p class="text-muted text-lg mb-8">Backend Developer · Building MarcusAI</p>
-  <div class="flex gap-3 text-sm font-mono">
-    <a
-      href="https://github.com/[tu-usuario-github]"
-      target="_blank"
-      rel="noopener"
-      class="border border-accent text-accent px-4 py-2 hover:bg-accent hover:text-bg transition-colors"
-    >
-      GitHub
-    </a>
-    <a
-      href="https://www.linkedin.com/in/jonathan-alexis-montenegro/"
-      target="_blank"
-      rel="noopener"
-      class="border border-surface text-muted px-4 py-2 hover:border-muted hover:text-text transition-colors"
-    >
-      LinkedIn
-    </a>
+<section class="py-16 border-b border-surface relative overflow-hidden" data-animate>
+  <!-- Scanlines overlay -->
+  <div class="absolute inset-0 scanlines-pattern pointer-events-none" aria-hidden="true"></div>
+
+  <div class="flex items-start gap-6 relative">
+    <!-- Foto de perfil -->
+    <div class="shrink-0">
+      <div class="w-28 h-28 rounded-full border border-accent/30 overflow-hidden ring-2 ring-accent/10">
+        <img
+          src="/foto.jpg"
+          alt="Jonathan Montenegro"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <p class="font-mono text-accent text-sm mb-3">
+        <span id="typing-prompt"></span><span class="typing-cursor text-accent">█</span>
+      </p>
+      <h1 class="text-4xl font-display font-semibold mb-2 tracking-tight glow-accent-subtle">
+        Jonathan Montenegro
+      </h1>
+      <p class="text-muted text-lg mb-8">Backend Developer · Building MarcusAI</p>
+      <div class="flex gap-3 text-sm font-mono">
+        <a
+          href="https://github.com/JonAleMonte1997"
+          target="_blank"
+          rel="noopener"
+          class="border border-accent text-accent px-4 py-2 hover:bg-accent hover:text-bg transition-colors duration-200 cursor-pointer glow-accent"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://www.linkedin.com/in/jonathan-alexis-montenegro/"
+          target="_blank"
+          rel="noopener"
+          class="border border-surface text-muted px-4 py-2 hover:border-muted hover:text-text transition-colors duration-200 cursor-pointer"
+        >
+          LinkedIn
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  const TYPING_TEXT = '$ whoami';
+  const TYPING_SPEED = 75;
+
+  function startTyping() {
+    const el = document.getElementById('typing-prompt');
+    if (!el) return;
+
+    el.textContent = '';
+    let i = 0;
+
+    const interval = setInterval(() => {
+      el.textContent += TYPING_TEXT[i];
+      i++;
+      if (i >= TYPING_TEXT.length) clearInterval(interval);
+    }, TYPING_SPEED);
+  }
+
+  document.addEventListener('astro:page-load', startTyping);
+</script>

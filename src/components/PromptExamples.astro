@@ -1,0 +1,170 @@
+---
+const examples = [
+  {
+    id: 'marketing',
+    icon: '📣',
+    title: 'Estratega de marketing digital',
+    category: 'Marketing',
+    prompt: `Soy dueño de una tienda de ropa sustentable en Buenos Aires con presencia en Instagram y TikTok. Creá un plan de contenido para el próximo mes que ayude a aumentar el engagement y las ventas. Incluí 3 ideas de posts por semana con el formato (tipo de contenido, tema, caption de ejemplo), enfocándote en la historia de la marca y los valores de sustentabilidad.`,
+  },
+  {
+    id: 'cv',
+    icon: '📄',
+    title: 'Analizador de CV',
+    category: 'Carrera',
+    prompt: `Sos un reclutador senior especializado en startups tecnológicas de Latinoamérica. Voy a pegarte mi CV. Analizá si está bien posicionado para aplicar a roles de backend developer en startups de etapa temprana. Dame feedback en tres secciones: fortalezas, áreas de mejora y sugerencias específicas de redacción.`,
+  },
+  {
+    id: 'nutricionista',
+    icon: '🥗',
+    title: 'Nutricionista personal',
+    category: 'Salud',
+    prompt: `Soy una persona de 30 años, 75kg, que hace ejercicio 3 veces por semana y quiero aumentar masa muscular sin suplementos. Armame un plan alimenticio para una semana de lunes a viernes. Formato: desayuno, almuerzo, merienda y cena. Incluí macros aproximados por día y priorizá alimentos fáciles de conseguir en Argentina.`,
+  },
+  {
+    id: 'chef',
+    icon: '🍳',
+    title: 'Chef personal',
+    category: 'Cocina',
+    prompt: `Sos un chef profesional especializado en cocina italiana y mediterránea. Tengo estos ingredientes disponibles: pasta, tomate en lata, ajo, aceite de oliva, cebolla, queso rallado y albahaca seca. Sugerí 2 recetas que pueda hacer hoy. Para cada una: nombre, tiempo de preparación, pasos claros y un tip profesional.`,
+  },
+  {
+    id: 'mercado',
+    icon: '📈',
+    title: 'Analizador de mercado',
+    category: 'Negocios',
+    prompt: `Soy el CTO de una startup B2B de SaaS que automatiza facturación para pymes en Argentina. Estamos evaluando expandirnos a México y Colombia. Analizá el mercado de software contable para pymes en esos países: tamaño estimado, principales competidores, barreras de entrada y oportunidades. Estructuralo como un análisis ejecutivo de no más de 600 palabras con bullets.`,
+  },
+  {
+    id: 'code-review',
+    icon: '🔍',
+    title: 'Revisor de código',
+    category: 'Desarrollo',
+    prompt: `Sos un developer senior especializado en Node.js y arquitectura de microservicios. Voy a pegarte una función de autenticación que escribí. Revisala y dame feedback en tres categorías: (1) bugs o vulnerabilidades de seguridad, (2) calidad del código y legibilidad, (3) sugerencias de mejora con código de ejemplo. Sé directo y técnico.`,
+  },
+];
+
+const metaPrompt = {
+  id: 'meta',
+  icon: '✨',
+  title: 'Generador de prompts',
+  prompt: `Tu tarea es ayudarme a escribir un buen prompt. Te voy a describir qué quiero lograr y vos generás el prompt optimizado siguiendo esta estructura:
+
+[Contexto: quién soy y cuál es el objetivo]
+[Tarea: qué acción específica necesito]
+[Reglas: formato, tono y restricciones]
+
+Lo que quiero lograr: [DESCRIBÍ ACÁ TU OBJETIVO]`,
+};
+---
+
+<section class="mt-12 pt-10 border-t border-surface not-prose">
+  <h2 class="text-xl font-semibold text-text mb-1">Ejemplos de prompts</h2>
+  <p class="text-sm text-muted mb-6">Hacé click en cada tarjeta para ver el prompt completo.</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+    {examples.map((ex) => (
+      <div
+        class="prompt-card group cursor-pointer rounded-lg border border-surface bg-surface/50 hover:border-accent/30 transition-colors"
+        data-id={ex.id}
+      >
+        <button
+          class="w-full text-left px-4 py-3 flex items-center gap-3"
+          aria-expanded="false"
+          aria-controls={`prompt-${ex.id}`}
+        >
+          <span class="text-xl shrink-0">{ex.icon}</span>
+          <span class="flex-1 min-w-0">
+            <span class="block text-sm font-medium text-text">{ex.title}</span>
+            <span class="font-mono text-xs text-muted">{ex.category}</span>
+          </span>
+          <span class="chevron shrink-0 font-mono text-xs text-muted transition-transform">▼</span>
+        </button>
+
+        <div
+          id={`prompt-${ex.id}`}
+          class="prompt-body hidden px-4 pb-4"
+        >
+          <div class="relative bg-bg rounded-md border border-surface p-3 mt-1">
+            <p class="font-mono text-xs text-text/80 leading-relaxed whitespace-pre-wrap pr-16">{ex.prompt}</p>
+            <button
+              class="copy-btn absolute top-2 right-2 font-mono text-xs text-muted hover:text-accent transition-colors px-2 py-1 rounded border border-surface hover:border-accent/30"
+              data-prompt={ex.prompt}
+              aria-label="Copiar prompt"
+            >
+              copiar
+            </button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="rounded-lg border border-accent/30 bg-accent/5 p-1">
+    <div
+      class="prompt-card cursor-pointer"
+      data-id={metaPrompt.id}
+    >
+      <button
+        class="w-full text-left px-4 py-3 flex items-center gap-3"
+        aria-expanded="false"
+        aria-controls={`prompt-${metaPrompt.id}`}
+      >
+        <span class="text-xl shrink-0">{metaPrompt.icon}</span>
+        <span class="flex-1 min-w-0">
+          <span class="block text-sm font-semibold text-accent">{metaPrompt.title}</span>
+          <span class="font-mono text-xs text-muted">Pegá este prompt para que Claude te ayude a construir el tuyo</span>
+        </span>
+        <span class="chevron shrink-0 font-mono text-xs text-muted transition-transform">▼</span>
+      </button>
+
+      <div
+        id={`prompt-${metaPrompt.id}`}
+        class="prompt-body hidden px-4 pb-4"
+      >
+        <div class="relative bg-bg rounded-md border border-accent/20 p-3 mt-1">
+          <p class="font-mono text-xs text-text/80 leading-relaxed whitespace-pre-wrap pr-16">{metaPrompt.prompt}</p>
+          <button
+            class="copy-btn absolute top-2 right-2 font-mono text-xs text-muted hover:text-accent transition-colors px-2 py-1 rounded border border-surface hover:border-accent/30"
+            data-prompt={metaPrompt.prompt}
+            aria-label="Copiar prompt"
+          >
+            copiar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.prompt-card').forEach((card) => {
+    const btn = card.querySelector<HTMLButtonElement>('button[aria-expanded]');
+    const body = card.querySelector<HTMLElement>('.prompt-body');
+    const chevron = card.querySelector<HTMLElement>('.chevron');
+
+    if (!btn || !body || !chevron) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      body.classList.toggle('hidden', isOpen);
+      chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const prompt = btn.dataset.prompt ?? '';
+      await navigator.clipboard.writeText(prompt);
+      const original = btn.textContent;
+      btn.textContent = '✓ copiado';
+      btn.classList.add('text-accent');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('text-accent');
+      }, 1500);
+    });
+  });
+</script>

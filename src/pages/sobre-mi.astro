@@ -13,8 +13,21 @@ const tools = [
 ];
 ---
 <BaseLayout title="Sobre mí" description="Experiencia, habilidades y educación de Jonathan Montenegro">
-  <h1 class="text-3xl font-semibold mb-1">Jonathan Montenegro</h1>
-  <p class="text-muted mb-10">Backend Developer · Chivilcoy, Argentina</p>
+  <div class="flex items-center gap-5 mb-10">
+    <div class="shrink-0">
+      <div class="w-32 h-32 rounded-full border border-accent/30 overflow-hidden ring-2 ring-accent/10">
+        <img
+          src="/foto.jpg"
+          alt="Jonathan Montenegro"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+    <div>
+      <h1 class="text-3xl font-semibold mb-1">Jonathan Montenegro</h1>
+      <p class="text-muted">Backend Developer · Chivilcoy, Argentina</p>
+    </div>
+  </div>
 
   <section class="mb-12">
     <h2 class="font-mono text-accent text-sm mb-6">// experiencia</h2>

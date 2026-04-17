@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -20,9 +21,10 @@ const { title, description = 'Sitio personal de Jonathan Montenegro — Backend 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <ViewTransitions />
   </head>
   <body class="bg-bg text-text font-sans min-h-screen flex flex-col">
     <Header />
@@ -30,5 +32,27 @@ const { title, description = 'Sitio personal de Jonathan Montenegro — Backend 
       <slot />
     </main>
     <Footer />
+    <script>
+      function initScrollAnimations() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08 }
+        );
+
+        document.querySelectorAll('[data-animate]').forEach((el) => {
+          el.classList.remove('in-view');
+          observer.observe(el);
+        });
+      }
+
+      document.addEventListener('astro:page-load', initScrollAnimations);
+    </script>
   </body>
 </html>
