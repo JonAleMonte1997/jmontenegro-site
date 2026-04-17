@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ModuleCard from '../../components/ModuleCard.astro';
+import { getCollection } from 'astro:content';
+
+const modules = (await getCollection('aprendizaje', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Aprendizaje" description="Módulos de inteligencia artificial que Jonathan Montenegro va documentando">
+  <h1 class="text-3xl font-semibold mb-2">Aprendizaje</h1>
+  <p class="text-muted mb-8">Módulos de IA que voy documentando mientras aprendo.</p>
+
+  {modules.length === 0 && (
+    <p class="text-muted text-sm">Sin módulos todavía.</p>
+  )}
+  <div class="grid gap-3">
+    {modules.map(mod => (
+      <ModuleCard
+        title={mod.data.title}
+        description={mod.data.description}
+        date={mod.data.date}
+        slug={mod.slug}
+      />
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+}
+
+const { title, description, date } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('es-AR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<BaseLayout title={title} description={description}>
+  <article>
+    <header class="mb-8 pb-8 border-b border-surface">
+      <a href="/aprendizaje" class="font-mono text-xs text-muted hover:text-accent transition-colors">
+        ← aprendizaje
+      </a>
+      <time class="font-mono text-xs text-muted block mt-4">{formattedDate}</time>
+      <h1 class="text-3xl font-semibold mt-2">{title}</h1>
+      <p class="text-muted mt-2">{description}</p>
+    </header>
+    <div class="prose prose-invert prose-sm max-w-none prose-headings:font-semibold prose-headings:text-text prose-a:text-accent prose-code:text-accent prose-code:bg-surface prose-code:px-1 prose-code:rounded prose-pre:bg-surface">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

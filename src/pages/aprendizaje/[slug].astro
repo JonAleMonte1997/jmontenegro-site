@@ -1,0 +1,22 @@
+---
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const modules = await getCollection('aprendizaje', ({ data }) => !data.draft);
+  return modules.map(mod => ({
+    params: { slug: mod.slug },
+    props: { mod },
+  }));
+}
+
+const { mod } = Astro.props;
+const { Content } = await mod.render();
+---
+<ModuleLayout
+  title={mod.data.title}
+  description={mod.data.description}
+  date={mod.data.date}
+>
+  <Content />
+</ModuleLayout>
