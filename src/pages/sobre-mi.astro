@@ -1,19 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const skills = [
-  'Java 7/8/11', 'Spring Boot', 'Quarkus', 'Kafka', 'JUnit',
-  'Oracle SQL', 'MongoDB', 'Git', 'API Rest', 'SOAP',
-  'DDD', 'Arquitectura Hexagonal', 'Docker', 'Microservicios',
+const skillsBackend = [
+  'Java 21', 'Spring Boot', 'Quarkus', 'Kafka', 'JUnit',
+  'Oracle SQL', 'MongoDB', 'API Rest', 'SOAP',
+  'DDD', 'Arquitectura Hexagonal', 'Microservicios', 'Docker',
+];
+
+const skillsIA = [
+  'Claude API', 'NestJS', 'TypeScript', 'Baileys (WhatsApp Web)',
+  'Google Calendar API', 'Prompt Engineering',
 ];
 
 const tools = [
-  'IntelliJ IDEA', 'Eclipse', 'GitHub', 'GitLab', 'Docker',
-  'SonarQube', 'MongoDBCompass', 'Jira', 'Postman', 'Oracle SQL Developer',
+  'GitHub', 'SonarQube', 'Postman',
+];
+
+const educacionCoderhouse = [
+  { curso: 'Java Inicial', anio: '2019' },
+  { curso: 'Java Avanzado', anio: '2019' },
+  { curso: 'Metodologías Ágiles', anio: '2020' },
+  { curso: 'Desarrollo Web', anio: '2020' },
+  { curso: 'Angular', anio: '2021' },
+  { curso: 'Testing QA Manual', anio: '2021' },
+  { curso: 'JavaScript', anio: '2022' },
+];
+
+const educacionUdemy = [
+  { curso: 'Docker', anio: '2022' },
+  { curso: 'Arquitectura de Software Moderna', anio: '2022' },
+  { curso: 'Apache Kafka desde cero', anio: '2023' },
+  { curso: 'Microservices: Clean Architecture, DDD, SAGA, Outbox & Kafka', anio: '2023' },
 ];
 ---
 <BaseLayout title="Sobre mí" description="Experiencia, habilidades y educación de Jonathan Montenegro">
-  <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mb-10 text-center sm:text-left">
+  <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mb-8 text-center sm:text-left">
     <div class="shrink-0">
       <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-accent/30 overflow-hidden ring-2 ring-accent/10">
         <img
@@ -25,9 +46,41 @@ const tools = [
     </div>
     <div>
       <h1 class="text-2xl sm:text-3xl font-semibold mb-1">Jonathan Montenegro</h1>
-      <p class="text-muted">Backend Developer · Chivilcoy, Argentina</p>
+      <p class="text-muted">Backend Developer · Builder de productos con IA · Chivilcoy, Argentina · <span class="text-accent/70">Open to Remote</span></p>
+      <div class="flex gap-3 mt-2 justify-center sm:justify-start">
+        <a href="https://github.com/JonAleMonte1997" target="_blank" rel="noopener" class="font-mono text-xs text-muted hover:text-accent transition-colors">GitHub</a>
+        <span class="text-muted/40">·</span>
+        <a href="https://www.linkedin.com/in/jonathan-alexis-montenegro/" target="_blank" rel="noopener" class="font-mono text-xs text-muted hover:text-accent transition-colors">LinkedIn</a>
+      </div>
     </div>
   </div>
+
+  <p class="text-sm text-muted leading-relaxed mb-12 max-w-2xl">
+    Backend developer con 5+ años en Java y sistemas distribuidos. En paralelo a mi trabajo en Interbanking, construyo productos con IA: actualmente <a href="/proyectos/marcus-ai" class="text-accent hover:underline">Marcus</a>, un asistente personal que conecta Claude con WhatsApp y Google Calendar. Me interesa el lado aplicado de la IA: no la teoría, sino qué se puede construir con ella hoy.
+  </p>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-accent text-sm mb-6">// proyectos destacados</h2>
+
+    <div class="border border-surface p-5 hover:border-muted transition-colors">
+      <div class="flex items-start justify-between gap-4 flex-wrap mb-3">
+        <div>
+          <h3 class="font-medium">Marcus AI</h3>
+          <p class="text-muted text-sm">Asistente personal single-user</p>
+        </div>
+        <span class="font-mono text-xs text-accent border border-accent/30 px-2 py-0.5">en desarrollo</span>
+      </div>
+      <p class="text-sm text-muted mb-3">
+        Asistente que recibe mensajes por WhatsApp, razona con Claude y gestiona agenda en Google Calendar. Construido con NestJS + Baileys + Claude API. Sin dashboards, sin UI — solo chat.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['NestJS', 'TypeScript', 'Claude API', 'Baileys', 'Google Calendar API'].map(t => (
+          <span class="font-mono text-xs border border-surface px-2 py-0.5 text-muted">{t}</span>
+        ))}
+      </div>
+      <a href="/proyectos/marcus-ai" class="font-mono text-xs text-accent hover:underline">ver devlog →</a>
+    </div>
+  </section>
 
   <section class="mb-12">
     <h2 class="font-mono text-accent text-sm mb-6">// experiencia</h2>
@@ -37,17 +90,17 @@ const tools = [
         <div>
           <h3 class="font-medium">Back End Developer</h3>
           <p class="text-muted text-sm">Interbanking</p>
+          <p class="font-mono text-xs text-muted mt-0.5">Equipo de 10 · 5 devs · 2 QA · 1 BA · 1 PO</p>
         </div>
         <span class="font-mono text-xs text-muted whitespace-nowrap">Sep 2021 — Actualidad</span>
       </div>
       <ul class="mt-3 space-y-1 text-sm text-muted">
-        <li>— Migración completa de microservicios Quarkus 2 → 3</li>
-        <li>— Integración con Oracle Content Management para gestión de documentos legales</li>
-        <li>— Diseño con DDD, arquitectura hexagonal, patrón Outbox, Kafka, MongoDB y Oracle SQL</li>
-        <li>— Desacoplamiento de procesos en sistemas legacy Struts hacia microservicios Quarkus</li>
-        <li>— 100% de cobertura de tests unitarios en todos los desarrollos</li>
-        <li>— Documentación de servicios con Swagger y Backstage</li>
-        <li>— Monitoreo continuo con SonarQube y Trivy</li>
+        <li>— Migré 4 microservicios de Quarkus 2 → 3, garantizando estabilidad y compatibilidad en un sistema financiero de alta criticidad</li>
+        <li>— Diseñé e implementé 2 microservicios nuevos con DDD, arquitectura hexagonal y patrón Outbox sobre Kafka, MongoDB y Oracle SQL</li>
+        <li>— Desacoplé procesos de un sistema legacy en Struts hacia microservicios Quarkus, mejorando mantenibilidad y escalabilidad</li>
+        <li>— Integré microservicios con Oracle Content Management para digitalizar la descarga de documentos legales por parte de los clientes</li>
+        <li>— Mantuve 100% de cobertura de tests unitarios como estándar en todos los desarrollos</li>
+        <li>— Documenté el 100% de los servicios con Swagger y Backstage; monitoreo continuo de calidad y vulnerabilidades con SonarQube y Trivy</li>
       </ul>
     </div>
 
@@ -60,17 +113,28 @@ const tools = [
         <span class="font-mono text-xs text-muted whitespace-nowrap">Mar 2020 — Ago 2021</span>
       </div>
       <ul class="mt-3 space-y-1 text-sm text-muted">
-        <li>— Sistema de gestión de recetas para Óptica Chivilcoy (Java, Spring Boot, SQL)</li>
-        <li>— Sistema de ventas, stock y pedidos para Panadería La Unión</li>
+        <li>— Desarrollé un sistema de gestión de recetas ópticas para Óptica Chivilcoy — Java, Spring Boot, SQL — reemplazando el proceso manual de registro</li>
+        <li>— Construí un sistema de ventas, stock y pedidos para Panadería La Unión, automatizando el control de inventario y pedidos desde cero</li>
       </ul>
     </div>
   </section>
 
   <section class="mb-12">
-    <h2 class="font-mono text-accent text-sm mb-4">// habilidades técnicas</h2>
-    <div class="flex flex-wrap gap-2">
-      {skills.map(skill => (
+    <h2 class="font-mono text-accent text-sm mb-5">// habilidades técnicas</h2>
+
+    <p class="font-mono text-xs text-muted mb-3">Backend</p>
+    <div class="flex flex-wrap gap-2 mb-6">
+      {skillsBackend.map(skill => (
         <span class="font-mono text-xs border border-surface px-2 py-1 text-muted hover:border-muted transition-colors">
+          {skill}
+        </span>
+      ))}
+    </div>
+
+    <p class="font-mono text-xs text-muted mb-3">IA & productos</p>
+    <div class="flex flex-wrap gap-2">
+      {skillsIA.map(skill => (
+        <span class="font-mono text-xs border border-accent/20 px-2 py-1 text-muted hover:border-accent/50 transition-colors">
           {skill}
         </span>
       ))}
@@ -90,18 +154,61 @@ const tools = [
 
   <section>
     <h2 class="font-mono text-accent text-sm mb-4">// educación</h2>
-    <div class="space-y-4 text-sm">
+    <div class="space-y-6 text-sm">
+
+      <div>
+        <div class="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <p class="font-medium">Novolabs Startup School</p>
+            <p class="text-muted">Programa Lanzar · Batch 17</p>
+            <p class="text-sm text-muted mt-1">Programa de 4 meses para validar productos, lanzar un MVP y conseguir primeros clientes. Mi proyecto de IA fue seleccionado entre los participantes del batch.</p>
+          </div>
+          <span class="font-mono text-xs text-accent/70 whitespace-nowrap">Mar 2026 — Jul 2026</span>
+        </div>
+      </div>
+
       <div>
         <p class="font-medium">Técnico en Programación de Computadores</p>
         <p class="text-muted">Universidad Nacional de Lomas de Zamora</p>
       </div>
+
       <div>
-        <p class="font-medium">Java Inicial · Java Avanzado · Metodologías Ágiles · Desarrollo Web · Angular · Testing QA Manual · JavaScript</p>
-        <p class="text-muted">CoderHouse</p>
+        <p class="font-medium mb-2">CoderHouse</p>
+        <ul class="space-y-1">
+          {educacionCoderhouse.map(item => (
+            <li class="flex justify-between text-muted">
+              <span>— {item.curso}</span>
+              <span class="font-mono text-xs">{item.anio}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-medium mb-2">Udemy</p>
+        <ul class="space-y-1">
+          {educacionUdemy.map(item => (
+            <li class="flex justify-between text-muted">
+              <span>— {item.curso}</span>
+              <span class="font-mono text-xs">{item.anio}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-accent text-sm mb-4">// idiomas</h2>
+    <div class="flex gap-6 text-sm text-muted">
+      <div>
+        <span class="text-text">Español</span>
+        <span class="font-mono text-xs ml-2">nativo</span>
       </div>
       <div>
-        <p class="font-medium">Docker · Arquitectura Software Moderna · Apache Kafka desde cero · Microservices: Clean Architecture, DDD, SAGA, Outbox & Kafka</p>
-        <p class="text-muted">Udemy</p>
+        <span class="text-text">Inglés</span>
+        <span class="font-mono text-xs ml-2">profesional</span>
       </div>
     </div>
   </section>

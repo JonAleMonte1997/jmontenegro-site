@@ -1,54 +1,40 @@
 ---
 title: "Cómo escribir prompts efectivos"
-description: "Qué aprendí del curso de Anthropic sobre cómo hablarle a Claude: contexto, tarea y reglas claras para obtener mejores resultados."
+description: "Tres elementos para darle contexto, tarea y formato a cualquier modelo de IA y obtener respuestas más precisas."
 date: 2026-04-17
 draft: false
 ---
 
 import PromptExamples from '../../components/PromptExamples.astro';
 
-## La idea base
+## La fórmula
 
-La mejor forma de hablarle a Claude es como si fuera un compañero de trabajo: de forma natural, concisa y conversacional. No necesitás usar palabras mágicas ni formatos especiales.
+Un buen prompt tiene tres partes. Sin importar el modelo que uses, si las incluís vas a obtener respuestas mucho más precisas.
 
-Lo que sí importa es que el prompt tenga tres elementos bien definidos.
+## Los tres elementos
 
-## Los tres elementos de un buen prompt
+**1. Contexto** — ¿quién sos y por qué pedís esto?
 
-**1. Establecer el contexto**
+> "Soy el lead de marketing de una startup de streaming independiente preparando un pitch deck para inversores Serie A."
 
-¿Cuál es tu rol? ¿Cuál es el objetivo? ¿Qué información de fondo necesita Claude para ayudarte bien?
+**2. Tarea** — ¿qué acción específica necesitás?
 
-> "Soy el lead de marketing de una startup de streaming independiente y estamos preparando un pitch deck para inversores Serie A."
+> "Investigá el mercado de streaming independiente e identificá tendencias clave, posicionamiento de competidores y oportunidades de crecimiento."
 
-**2. Definir la tarea**
+**3. Formato** — ¿cómo querés recibir la respuesta?
 
-¿Qué acción querés que tome? ¿Escribir, analizar, construir, investigar?
+> "Estructuralo como un informe profesional de hasta 5 páginas, con resumen ejecutivo, análisis de mercado y oportunidades. Incluí fuentes."
 
-> "Investigá el estado actual del mercado de streaming independiente e identificá tendencias clave, posicionamiento de competidores y oportunidades de crecimiento."
+## Prompt completo
 
-**3. Especificar las reglas**
+> *"Soy el lead de marketing de una startup de streaming independiente preparando un pitch deck para inversores Serie A. Investigá el estado actual del mercado de streaming independiente e identificá tendencias clave, posicionamiento de competidores y oportunidades de crecimiento. Estructuralo como un informe profesional de hasta 5 páginas con resumen ejecutivo, análisis de mercado y oportunidades. Incluí fuentes."*
 
-¿Qué tono, estilo o formato necesitás? ¿Hay ejemplos que puedas adjuntar?
+## Checklist rápido
 
-> "Usá fuentes actuales con citas y estructuralo como un informe profesional de hasta 5 páginas, con resumen ejecutivo, análisis de mercado, panorama competitivo y oportunidades de crecimiento."
+Antes de enviar un prompt, confirmá:
 
-## Ejemplo completo
-
-Combinando los tres:
-
-> *"Soy el lead de marketing de una startup de streaming independiente y estamos preparando un pitch deck para inversores Serie A. ¿Podés investigar el estado actual del mercado de streaming independiente e identificar tendencias clave, posicionamiento de competidores y oportunidades de crecimiento? Usá investigación web actual con citas y estructuralo como un informe profesional de hasta 5 páginas, con resumen ejecutivo, análisis de mercado, panorama competitivo y oportunidades de crecimiento."*
-
-Ese prompt funciona porque Claude sabe para quién es, qué tiene que hacer y cómo tiene que entregarlo.
-
-## Lo que aprendí en la práctica
-
-Antes de escribir un prompt, me pregunto:
-
-- ¿Claude sabe quién soy y por qué le pido esto?
-- ¿Le dije exactamente qué acción tomar?
-- ¿Le dije cómo quiero que me entregue el resultado?
-
-Si las tres respuestas son "sí", el prompt es sólido.
+- ¿El modelo sabe quién sos y para qué necesitás esto?
+- ¿Le dijiste exactamente qué hacer?
+- ¿Le dijiste cómo entregarte el resultado?
 
 <PromptExamples />
