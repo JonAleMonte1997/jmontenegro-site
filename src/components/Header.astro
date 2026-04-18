@@ -8,12 +8,14 @@ const navLinks = [
 
 const currentPath = Astro.url.pathname;
 ---
-<header class="border-b border-surface sticky top-0 z-10 bg-bg/90 backdrop-blur-sm">
+<header class="border-b border-surface sticky top-0 z-10 bg-bg/90 backdrop-blur-sm" id="site-header">
   <nav class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
     <a href="/" class="font-mono text-accent font-medium tracking-tight hover:opacity-80 transition-opacity cursor-pointer glow-accent">
       jmontenegro
     </a>
-    <ul class="flex gap-6 text-sm">
+
+    <!-- Nav desktop -->
+    <ul class="hidden md:flex gap-6 text-sm">
       {navLinks.map(link => (
         <li>
           <a
@@ -25,5 +27,80 @@ const currentPath = Astro.url.pathname;
         </li>
       ))}
     </ul>
+
+    <!-- Botón hamburguesa (mobile) -->
+    <button
+      id="menu-toggle"
+      class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line block w-5 h-px bg-text transition-transform duration-200 origin-center"></span>
+      <span class="hamburger-line block w-5 h-px bg-text transition-opacity duration-200"></span>
+      <span class="hamburger-line block w-5 h-px bg-text transition-transform duration-200 origin-center"></span>
+    </button>
   </nav>
+
+  <!-- Dropdown mobile -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-surface bg-bg/95 backdrop-blur-sm"
+  >
+    <ul class="max-w-3xl mx-auto px-4 py-2">
+      {navLinks.map(link => (
+        <li class="border-b border-surface/50 last:border-0">
+          <a
+            href={link.href}
+            class={`block py-3 text-sm transition-colors duration-200 ${currentPath.startsWith(link.href) ? 'text-text' : 'text-muted hover:text-text'}`}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </header>
+
+<script>
+  function initMenu() {
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const lines = document.querySelectorAll<HTMLElement>('.hamburger-line');
+
+    if (!toggle || !menu) return;
+
+    function openMenu() {
+      menu!.classList.remove('hidden');
+      toggle!.setAttribute('aria-expanded', 'true');
+      (lines[0] as HTMLElement).style.transform = 'translateY(6.5px) rotate(45deg)';
+      (lines[1] as HTMLElement).style.opacity = '0';
+      (lines[2] as HTMLElement).style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    }
+
+    function closeMenu() {
+      menu!.classList.add('hidden');
+      toggle!.setAttribute('aria-expanded', 'false');
+      (lines[0] as HTMLElement).style.transform = '';
+      (lines[1] as HTMLElement).style.opacity = '';
+      (lines[2] as HTMLElement).style.transform = '';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+      const header = document.getElementById('site-header');
+      if (header && !header.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initMenu);
+</script>
