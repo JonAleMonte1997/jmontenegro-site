@@ -1,13 +1,13 @@
 ---
 ---
-<section class="py-16 border-b border-surface relative overflow-hidden" data-animate>
+<section class="py-10 md:py-16 border-b border-surface relative overflow-hidden" data-animate>
   <!-- Scanlines overlay -->
   <div class="absolute inset-0 scanlines-pattern pointer-events-none" aria-hidden="true"></div>
 
-  <div class="flex items-start gap-6 relative">
+  <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 relative">
     <!-- Foto de perfil -->
     <div class="shrink-0">
-      <div class="w-28 h-28 rounded-full border border-accent/30 overflow-hidden ring-2 ring-accent/10">
+      <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border border-accent/30 overflow-hidden ring-2 ring-accent/10">
         <img
           src="/foto.jpg"
           alt="Jonathan Montenegro"
@@ -16,15 +16,15 @@
       </div>
     </div>
 
-    <div class="flex-1">
+    <div class="flex-1 text-center sm:text-left">
       <p class="font-mono text-accent text-sm mb-3">
         <span id="typing-prompt"></span><span class="typing-cursor text-accent">█</span>
       </p>
-      <h1 class="text-4xl font-display font-semibold mb-2 tracking-tight glow-accent-subtle">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-display font-semibold mb-2 tracking-tight glow-accent-subtle">
         Jonathan Montenegro
       </h1>
-      <p class="text-muted text-lg mb-8">Backend Developer · Building MarcusAI</p>
-      <div class="flex gap-3 text-sm font-mono">
+      <p class="text-muted text-base md:text-lg mb-6 sm:mb-8">Backend Developer · Building MarcusAI</p>
+      <div class="flex justify-center sm:justify-start gap-3 text-sm font-mono">
         <a
           href="https://github.com/JonAleMonte1997"
           target="_blank"
