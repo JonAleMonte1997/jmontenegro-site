@@ -69,29 +69,32 @@ const currentPath = Astro.url.pathname;
 
     if (!toggle || !menu) return;
 
+    const controller = new AbortController();
+    const { signal } = controller;
+
     function openMenu() {
       menu!.classList.remove('hidden');
       toggle!.setAttribute('aria-expanded', 'true');
-      (lines[0] as HTMLElement).style.transform = 'translateY(6.5px) rotate(45deg)';
-      (lines[1] as HTMLElement).style.opacity = '0';
-      (lines[2] as HTMLElement).style.transform = 'translateY(-6.5px) rotate(-45deg)';
+      lines[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+      lines[1].style.opacity = '0';
+      lines[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
     }
 
     function closeMenu() {
       menu!.classList.add('hidden');
       toggle!.setAttribute('aria-expanded', 'false');
-      (lines[0] as HTMLElement).style.transform = '';
-      (lines[1] as HTMLElement).style.opacity = '';
-      (lines[2] as HTMLElement).style.transform = '';
+      lines[0].style.transform = '';
+      lines[1].style.opacity = '';
+      lines[2].style.transform = '';
     }
 
     toggle.addEventListener('click', () => {
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
       isOpen ? closeMenu() : openMenu();
-    });
+    }, { signal });
 
     menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', closeMenu, { signal });
     });
 
     document.addEventListener('click', (e) => {
@@ -99,7 +102,11 @@ const currentPath = Astro.url.pathname;
       if (header && !header.contains(e.target as Node)) {
         closeMenu();
       }
-    });
+    }, { signal });
+
+    document.addEventListener('astro:before-preparation', () => {
+      controller.abort();
+    }, { once: true });
   }
 
   document.addEventListener('astro:page-load', initMenu);
